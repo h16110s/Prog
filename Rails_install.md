@@ -53,7 +53,7 @@ ADD . $APP_HOME
 $ vim Gemfile
 ```
 railsをインストールするだけのコマンドを記述する
-```
+```:Gemfile
 source 'https://rubygems.org'
 gem 'rails'
 ```
@@ -65,7 +65,6 @@ Dockerfile の構築には、空の Gemfile.lock が必要だそう。なので�
 $ touch Gemfile.lock
 ```
 
-
 ## docker-compose.ymlの作成
 複数のコンテナをうまいことするために定義するファイル。
 今回「Rubyコンテナ」「MySQLコンテナ」２つのコンテナを作成するので必要。
@@ -73,7 +72,8 @@ $ touch Gemfile.lock
 $ vim docker-compose.yml
 ```
 以下の内容を記述
-```
+ポート番号3306から4306にしとくと外から繋げやすい（多分）
+```:docker-compose.yml
 version: '2'
 services:
   db:
