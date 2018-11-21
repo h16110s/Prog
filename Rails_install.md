@@ -78,6 +78,8 @@ version: '2'
 services:
   db:
     image: mysql:5.7
+    ports:
+      - "4306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
   web:
@@ -113,7 +115,7 @@ $ docker-compose build
 
 ## config/database.ymlの設定
 configディレクトリ内のdatabase.ymlの設定を行う．
-```
+```:config/database.yml
 default: &default
   adapter: mysql2
   encoding: utf8
@@ -130,6 +132,22 @@ hostをdocker-compose.ymlの「depends_on」と同じにする
 ```
 $ docker-compose up
 ```
+始めはデータベースがないと
+Unknown database 'app_name_development'
+っていわれるけど別タブから
 
+```
+$ docker-compose run web rake db:create
+```
+でいけるらしい．
+あとはブラウザで localhost:3000でどうぞ
+
+
+基本的にRailsコマンドの最初に
+```
+docker-compose run web
+```
+をつけてやればコンテナ上で実行され、Mac側にも反映されます。
 # 参考にしたサイト
 https://qiita.com/orangeboy/items/668dea05722706a11874
+
